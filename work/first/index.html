@@ -76,6 +76,10 @@ $('#q6').children().click(function(){
   alert(index);
 });
 // 第7問  id='q7'の要素をクリックしたらこの要素に設定してあるdata属性をconsoleに表示せよ。
+$('#q7').click(function(){
+  let attribute =$(this).attr('data-text');
+  console.log(attribute);
+});
 </script>
 </body>
 </html>
