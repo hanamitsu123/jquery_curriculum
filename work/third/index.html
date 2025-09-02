@@ -24,7 +24,8 @@
     </div>
     <script src="../../common/js/jquery.js"></script>
     <script>
-      $('.nav li').click(function(){
+      $('.nav li').click(function()
+      {
         let index = $(this).index();
         $('.contents li').addClass('is-hidden');
         $('.contents li').eq(index).removeClass('is-hidden');
