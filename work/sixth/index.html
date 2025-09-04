@@ -19,7 +19,7 @@
 $(function () {
   const initial = $('#wrapper').html();
   $(document).on('click', '#pokemon_search', function () {
-      var pokemonNo = Math.floor(Math.random() * 151) + 1;
+      let pokemonNo = Math.floor(Math.random() * 151) + 1;
       $.ajax({
         url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
         method: 'GET',
@@ -49,7 +49,7 @@ $(function () {
           method: 'GET',
           dataType: 'json'
         }).done(function (res) {
-          var doneHtml =
+          let doneHtml =
             `<p class="name">ゲットしました！</p>
             <div>
               <img class="img" src="${res.sprites.default}" alt="">
@@ -58,7 +58,7 @@ $(function () {
           $('.wrapper').html(doneHtml);
         });
       } else {
-        var failHtml =
+        let failHtml =
           `<p class="text">逃げられてしまった…</p>
           <button class="btn mt" data-js="reset">戻る</button>`;
         $('.wrapper').html(failHtml);
