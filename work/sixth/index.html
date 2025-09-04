@@ -18,7 +18,9 @@
 
 $(function () {
   const initial = $('#wrapper').html();
-  $(document).on('click', '#pokemon_search', function () {
+  $(document)
+  .off('click', '#pokemon_search')
+  .on('click', '#pokemon_search', function () {
       let pokemonNo = Math.floor(Math.random() * 151) + 1;
       $.ajax({
         url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
@@ -41,7 +43,9 @@ $(function () {
         alert('ポケモンの取得に失敗しました');
       });
     });
-    $(document).on('click', '#catch', function () {
+    $(document)
+    .off('click', '#catch')
+    .on('click', '#catch', function () {
       let success = Math.random() < 0.5;
       if (success) {
         $.ajax({
@@ -64,7 +68,9 @@ $(function () {
         $('.wrapper').html(failHtml);
       }
     });
-    $(document).on('click', '[data-js="reset"]', function () {
+    $(document)
+    .off('click', '[data-js="reset"]')
+    .on('click', '[data-js="reset"]', function () {
       $('.wrapper').html(initial);
     });
   });
