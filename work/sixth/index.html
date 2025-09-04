@@ -15,7 +15,66 @@
   </div>
   <script src="../../common/js/jquery.js"></script>
   <script>
-    // 回答はここに書いてね
+
+$(function () {
+  const initial = $('#wrapper').html();
+  $(document)
+  .off('click', '#pokemon_search')
+  .on('click', '#pokemon_search', function () {
+      let pokemonNo = Math.floor(Math.random() * 151) + 1;
+      $.ajax({
+        url: 'https://pokeapi.co/api/v2/pokemon/' + pokemonNo,
+        method: 'GET',
+        dataType: 'json'
+      }).done(function (res) {
+        $.getJSON(res.species.url, function (species) {
+        let ja = species.names[0].name;
+        let encountHtml =
+        `<p class="name">${ja}</p>
+          <div>
+            <img class="img" src="${res.sprites.front_default}" alt="">
+          </div>
+          <div>
+            <button class="btn" id="catch">捕まえる</button>
+            <button class="btn" data-js="reset">逃げる</button>
+          </div>`;
+        $('.wrapper').html(encountHtml);
+      }).fail(function () {
+        alert('ポケモンの取得に失敗しました');
+      });
+    });
+    $(document)
+    .off('click', '#catch')
+    .on('click', '#catch', function () {
+      let success = Math.random() < 0.5;
+      if (success) {
+        $.ajax({
+          url: 'https://pokeapi.co/api/v2/item/4',
+          method: 'GET',
+          dataType: 'json'
+        }).done(function (res) {
+          let doneHtml =
+            `<p class="name">ゲットしました！</p>
+            <div>
+              <img class="img" src="${res.sprites.default}" alt="">
+            </div>
+            <button class="btn" data-js="reset">戻る</button>`;
+          $('.wrapper').html(doneHtml);
+        });
+      } else {
+        let failHtml =
+          `<p class="text">逃げられてしまった…</p>
+          <button class="btn mt" data-js="reset">戻る</button>`;
+        $('.wrapper').html(failHtml);
+      }
+    });
+    $(document)
+    .off('click', '[data-js="reset"]')
+    .on('click', '[data-js="reset"]', function () {
+      $('.wrapper').html(initial);
+    });
+  });
+});
   </script>
 </body>
 </html>
